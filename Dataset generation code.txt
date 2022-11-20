@@ -1,0 +1,177 @@
+### DATASET GENERATION ###
+
+N = 400;
+for (i=1:N) {
+
+iteration = i;
+    
+clear;
+switchtolayout;
+
+L2 = 0.001 * rand(473, 512 , 2);    ### BRIDGE
+W2 = 0.001 * rand(36, 40, 2);
+x2 = 0.001 * rand(219, 236, 2);
+delta_h = 0.044;
+select ("bridge");
+set ("y span top", (1e-6)*L2);
+set ("x span top", (1e-6)*W2);
+set ("x", -(1e-6)*x2);
+set ("y span bottom", (1e-6)*(L2 + delta_h));
+set ("x span bottom", (1e-6)*(W2 + delta_h));
+
+L1 = 0.001 * rand(436, 474, 2);   ### RECTANGLE
+W1 = 0.001 * rand(132, 146, 2);
+select ("rectangle_trunc");
+set ("x span top", (1e-6)*L1);
+set ("y span top", (1e-6)*W1);
+set ("x span bottom", (1e-6)*(L1 + delta_h));
+set ("y span bottom", (1e-6)*(W1 + delta_h));
+
+R = 0.001 * rand(46, 50, 2);   ### CIRCLE HOLE
+x = 0.001 * rand(73, 81, 2);
+select ("trunc_cone");
+set ("x", -(1e-6)*x);
+set ("r top", (1e-6)*R);
+set ("r bottom", (1e-6)*(R - delta_h/2));
+
+select ("Si on bot of cone");   ### Si ON BOTTOM OF CONE
+set ("x", -(1e-6)*x);
+
+select ("rect_void_above_bridge");  ### RECT_VOID_above_bridge
+set ("x", -(1e-6)*x2);
+
+select ("cylind_above_bridge");  ### CYLIND_above_bridge
+set ("x", -(1e-6)*x2);
+set ("z span", (1e-6)*(L2 + 0.0036));  # don't change the RADIUS
+
+select ("rect_vert_void_2");  ### RECT_VERT_VOID_2
+set ("x", (1e-6)*(-x2 + W2/2 - 0.01 + delta_h/4));
+set ("y", (1e-6)*(L2/2 - 0.01 + delta_h/4));
+
+select ("rect_vert_void_3");  ### RECT_VERT_VOID_3
+set ("x", (1e-6)*(-x2 - W2/2 + 0.01 - delta_h/4));
+set ("y", (1e-6)*(L2/2 - 0.01 + delta_h/4));
+
+select ("rect_vert_void_4");  ### RECT_VERT_VOID_4
+set ("x", (1e-6)*(-x2 - W2/2 + 0.01 - delta_h/4));
+set ("y", -(1e-6)*(L2/2 - 0.01 + delta_h/4));
+
+select ("rect_vert_void_5");  ### RECT_VERT_VOID_5
+set ("x", (1e-6)*(-x2 + W2/2 - 0.01 + delta_h/4));
+set ("y", -(1e-6)*(L2/2 - 0.01 + delta_h/4));
+
+select ("cylind_vert_2");  ### Cylind_VERT_2
+set ("x", (1e-6)*(-x2 + W2/2 - 0.02 + delta_h/4));
+set ("y", (1e-6)*(L2/2 - 0.02 + delta_h/4));
+
+select ("cylind_vert_3");  ### Cylind_VERT_3
+set ("x", (1e-6)*(-x2 - W2/2 + 0.02 - delta_h/4));
+set ("y", (1e-6)*(L2/2 - 0.02 + delta_h/4));
+
+select ("cylind_vert_4");  ###Cylind_VERT_4
+set ("x", (1e-6)*(-x2 - W2/2 + 0.02 - delta_h/4));
+set ("y", -(1e-6)*(L2/2 - 0.02 + delta_h/4));
+
+select ("cylind_vert_5");  ### Cylind_VERT_5
+set ("x", (1e-6)*(-x2 + W2/2 - 0.02 + delta_h/4));
+set ("y", -(1e-6)*(L2/2 - 0.02 + delta_h/4));
+
+select ("rect_vert_void_1");  ### RECT_VERT_VOID_1
+set ("x", (1e-6)*(L1/2 - 0.01 + delta_h/4));
+set ("y", (1e-6)*(W1/2 - 0.01 + delta_h/4));
+
+select ("rect_vert_void_6");  ### RECT_VERT_VOID_6
+set ("x", (1e-6)*(L1/2 - 0.01 + delta_h/4));
+set ("y", -(1e-6)*(W1/2 - 0.01 + delta_h/4));
+
+select ("cylind_vert_1");  ### CYLIND_VERT_1
+set ("x", (1e-6)*(L1/2 - 0.02 + delta_h/4));
+set ("y", (1e-6)*(W1/2 - 0.02 + delta_h/4));
+
+select ("cylind_vert_6");  ### CYLIND_VERT_6
+set ("x", (1e-6)*(L1/2 - 0.02 + delta_h/4));
+set ("y", -(1e-6)*(W1/2 - 0.02 + delta_h/4));
+
+select ("rect_horiz_void_1");  ### RECT_HORIZ_VOID_1
+set ("x max", (1e-6)*(L1/2 + 0.0017498));
+set ("x min", (1e-6)*(-x2 + W2/2 + 0.0017498));
+set ("y", (1e-6)*(W1/2 + 0.0017498));
+select ("rect_horiz_void_2");  ### RECT_HORIZ_VOID_2
+set ("x max", (1e-6)*(L1/2 + 0.0017498));
+set ("x min", (1e-6)*(-x2 + W2/2 + 0.0017498));
+set ("y", -(1e-6)*(W1/2 + 0.0017498));
+
+select ("cylind_horiz_1");  ### CYLIND_HORIZ_1
+set ("x", (1e-6)*(L1/2 - x2 + W2/2 + 0.0017498)/2);
+set ("y", (1e-6)*(W1/2 - 0.02 + 0.0017498));
+set ("z span", (1e-6)*(L1/2 + x2 - W2/2 - 0.0017498));  ### set R=20nm
+select ("cylind_horiz_2");  ### CYLIND_HORIZ_2
+set ("x", (1e-6)*(L1/2 - x2 + W2/2 + 0.0017498)/2);
+set ("y", -(1e-6)*(W1/2 - 0.02 + 0.0017498));
+set ("z span", (1e-6)*(L1/2 + x2 - W2/2 - 0.0017498));
+
+select ("rect_horiz_void_5");  ### RECT_HORIZ_VOID_5
+set ("x", (1e-6)*(L1/2 + 0.0017498));
+
+select ("cylind_horiz_5");  ### CYLIND_HORIZ_5
+set ("x", (1e-6)*(L1/2 - 0.02 + 0.0017498));
+set ("z span", (1e-6)*(W1 + 2*0.0017498));
+
+select ("rect_angle_1");  ### RECT_ANGLE_1
+set ("x", (1e-6)*(L1/2 + 0.0017498));
+set ("y", (1e-6)*(W1/2 + 0.0017498));
+select ("rect_angle_2");  ### RECT_ANGLE_2
+set ("x", (1e-6)*(L1/2 + 0.0017498));
+set ("y", -(1e-6)*(W1/2 + 0.0017498));
+
+select ("rect_angle_3");  ### RECT_ANGLE_3
+set ("x", -(1e-6)*x2);
+set ("y", -(1e-6)*(L2/2));   #remove (L2/2 + 0.0017498)
+set ("z min", (1e-6)*(0.258 - (W2/2)/0.91251)); #/tan5deg
+select ("rect_angle_4");  ### RECT_ANGLE_4
+set ("x", -(1e-6)*x2);
+set ("y", (1e-6)*(L2/2));   #remove (L2/2 + 0.0017498)
+set ("z min", (1e-6)*(0.258 - (W2/2)/0.91251)); #/tan5deg
+
+select ("sphere_angle_1");  ### SPHERE_ANGLE_1
+set ("x", (1e-6)*(L1/2 - 0.02 + 0.0017498));
+set ("y", (1e-6)*(W1/2 - 0.02 + 0.0017498));  #don't take into account z shift
+select ("sphere_angle_2");  ### SPHERE_ANGLE_2
+set ("x", (1e-6)*(L1/2 - 0.02 + 0.0017498));
+set ("y", -(1e-6)*(W1/2 - 0.02 + 0.0017498)); #don't take into account z shift
+
+select ("sphere_angle_3");  ### SPHERE_ANGLE_3
+set ("x", -(1e-6)*x2);
+set ("y", -(1e-6)*(L2/2 - W2/2));  #take how was previously
+set ("radius", (1e-6)*(W2/2)/0.91251);
+set ("z", (1e-6)*(0.258 - (W2/2)/0.91251)); #/tan5deg
+select ("sphere_angle_4");  ### SPHERE_ANGLE_4
+set ("x", -(1e-6)*x2);
+set ("y", (1e-6)*(L2/2 - W2/2));  #take how was previously
+set ("radius", (1e-6)*(W2/2)/0.91251);
+set ("z", (1e-6)*(0.258 - (W2/2)/0.91251)); #/tan5deg
+
+run;
+T_monitor = "T";
+#T = getdata(T_monitor, "T");
+T = transmission(T_monitor);
+T_new= -T;
+f = getdata(T_monitor,"f");
+lambda = c/f*1e9;
+f_new = f*1e-12;
+
+L1_nm = L1*1e3;
+W1_nm = W1*1e3;
+R_nm = R*1e3;
+x_nm = x*1e3;
+L2_nm = L2*1e3;
+W2_nm = W2*1e3;
+x2_nm = x2*1e3;
+
+full_data=[lambda, f_new, T_new];
+title = "Dataset_9" +", L1=" +num2str(L1_nm) +"nm, W1=" +num2str(W1_nm) +"nm, R=" +num2str(R_nm) +"nm, x=" +num2str(x_nm) +"nm, L2=" +num2str(L2_nm) +"nm, W2=" +num2str(W2_nm) +"nm, x2=" +num2str(x2_nm) +"nm.txt";
+write(title, "L1=" +num2str(L1_nm) +"nm, W1=" +num2str(W1_nm) +"nm, R=" +num2str(R_nm) +"nm, x=" +num2str(x_nm) +"nm, L2=" +num2str(L2_nm) +"nm, W2=" +num2str(W2_nm) +"nm, x2=" +num2str(x2_nm) +"nm");
+write(title,"Wavelenght(nm)" + " Frequency (THz)" + " T");
+write(title, num2str(full_data));
+
+}
